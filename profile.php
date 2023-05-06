@@ -1,6 +1,12 @@
 <?php
 include("dbconnect.php");
 session_start();
+extract($_POST);
+
+$mail =  $_SESSION['mail']; 
+
+$user = mysqli_query($conn,"select * from registration where mail = '$mail'");
+$user_row = mysqli_fetch_array($user);
 ?>
 <!DOCTYPE html>
 <html>
@@ -8,16 +14,89 @@ session_start();
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>profile</title>
+	<style>
+		.card {
+  width: 250px;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  display: inline-block;
+   margin: 20px;
+}
+a{
+  text-decoration: none;
+}
+
+.content {
+  padding: 1.1rem;
+}
+
+.image {
+  object-fit: cover;
+  width: 100%;
+  height: 150px;
+  background-color: rgb(239, 205, 255);
+  display: flex;
+}
+
+.title {
+  color: #111827;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+}
+
+.desc {
+  margin-top: 0.5rem;
+  color: #6B7280;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.action {
+  display: inline-flex;
+  margin-top: 1rem;
+  color: #ffffff;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  align-items: center;
+  gap: 0.25rem;
+  background-color: #2563EB;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.action span {
+  transition: .3s ease;
+}
+
+.action:hover span {
+  transform: translateX(4px);
+}
+		</style>
 </head>
 <body>
-	<header>
-		<a href="home.php">Home</a>
-		<a href="profile.php">Profile</a>
-		<a href="posts.php">Posts</a>
-		<a href="login.php">logout</a>
-	</header>
+<header>
+  	<h1>Welcome <?php echo $user_row['name']; ?> !</h1>
+    <a style="padding-left: 30px; padding-right: 30px;" href="home.php">Home</a>
+    <a style="padding-left: 30px; padding-right: 30px;" href="profile.php"></i>Profile</a>
+    <form style="float: right; margin: 5px;" method="get">
+		<a><button type="submit" name="logout">logout</button></a>
+		<?php
+	if(isset($_GET['logout'])){
+		
+		session_destroy();
+		
+		header('location:login.php');
+	}
+	if ($_SESSION['mail'] == null) {
+		header('location:login.php');	
+	}
+	?>
+	</form>
+  </header>
 	<div>
-	<img src="#" alt="profile">
+	<!-- <img src="#" alt="profile"> -->
 	<?php
 	extract($_POST);
 	$mail=$_SESSION['mail'];
@@ -29,12 +108,13 @@ session_start();
 	if (isset($_POST['post'])) {
 		if (isset($_FILES['image'])) {
 		$mail=$_SESSION['mail'];
+		$reg_date=date('Y-m-d');
 	extract($_POST);
 	$filename=uniqid().'-'.$_FILES['image']['name'];
 	$fileloc=$_FILES['image']['tmp_name'];
 	$folder="upload/";
 	$path=move_uploaded_file($fileloc,$folder.$filename);
-	$store=mysqli_query($conn,"insert into post values ('','$mail','$filename') ");
+	$store=mysqli_query($conn,"insert into post values ('','$mail','$filename','$title', '$description', '$status', '$details','$reg_date') ");
 	if ($store) {
 		echo '<script>alert("upload successfully")</script>';	
 	}
@@ -45,18 +125,55 @@ else{
 }
 	?>
 	<form method="post" enctype="multipart/form-data" action="profile.php">
-
-		<p><?php echo $row['name'] ?></p>
-		<input type="file" name="image">
+		<!-- <input type="file" name="image"> -->
+		<label>Banner:</label>
+		<input type="file" name="image" accept="image/*" required><br>
+		<label>Post Title:</label>
+		<input type="text" name="title" required><br>
+		<label>Post Description:</label>
+		<input type="text" name="description" required><br>
+		<label>Status:</label>
+		<input type="text" name="status" required><br>
+		<label>Post Details:</label>
+		<input type="text" name="details" required><br>
 		<input type="submit" name="post" value="upload">
 	</form>
 	<?php
 	$folder="upload/";
-	$show=mysqli_query($conn,"select * from post where mail='$mail'");
+	$show=mysqli_query($conn,"select * from post where mail='$mail' ORDER BY id DESC");
 	while($row1=mysqli_fetch_array($show)){
 	?>
-	<p style="display: inline;"><img src="<?php echo "$folder".$row1['image']; ?>" width="300px" height="300px"> </p>
-	<a href="?id=<?php echo $row1['id']; ?>" >delete</a>
+
+    <div class="card" style="margin-left: 40px; margin-right: 30px;">
+ <div class="image"><img src="<?php echo "$folder".$row1['image']; ?>">
+
+</div>
+  <div class="content">
+      <span class="title">
+        <?php echo $row1['title']; ?>
+      </span>
+
+    <p class="desc">
+      <?php echo $row1['description']; ?>
+    </p>
+    <p class="desc">
+      <?php echo $row1['status']; ?>
+    </p>
+    <p class="desc">
+      <?php echo $row1['reg_date']; ?>
+    </p>
+
+    <a href="detail.php?id=<?php echo $row1['id']?>" class="action">
+      Detailed view
+      <span aria-hidden="true">
+        →
+      </span>
+    </a><br><br>
+<a style="float: right;" href="edit.php?id=<?php echo $row1['id']; ?>">edit</a>
+    <a style="float: left;" href="?id=<?php echo $row1['id']; ?>"> delete</a><br>
+  </div>
+  </div>
+
 	<?php
 	if (isset($_GET['id'])) {
 		$id=$_GET['id'];
