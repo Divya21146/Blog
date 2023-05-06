@@ -14,6 +14,93 @@ $user_row = mysqli_fetch_array($user);
 <head>
 	<title>Add post</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<style>
+		.bg{
+			position: absolute;
+			width: 450px;
+			height: 450px;
+			padding: 30px 50px 0 50px;
+			border: 1px solid black;
+			border-radius: 10px;
+			margin: 60px 370px;
+		}
+		.bg h1{
+			margin: 0;
+			padding: 0 0 20px;
+			color: black;
+			text-align: center;
+			font-style: italic;
+		}
+		.bg label{
+			margin: 0;
+			padding: 0;
+			color: #000;
+		}
+		p{
+			color: #000;
+		}
+		.bg input{
+			width: 100%;
+			margin-bottom: 20px;
+		}
+		.bg input[type=fle],
+		.bg input[type=text]{
+			border: none;
+			border-bottom: 1px solid #000;
+			background: transparent;
+			outline: none;
+			height: 35px;
+			color: #000;
+			font-size: 15px;
+		}
+		.my-button {
+  background-color: rgb(24,117,255);
+  border: none;
+  color: white;
+  padding: 10px 30px;
+  text-align: center;
+  /*text-decoration: none;
+  display: inline-block;*/
+  font-size: 14px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  position: relative;
+  overflow: hidden;
+  float: right;
+  margin-right: 0;
+}
+
+.my-button:after {
+  content: "";
+  background-color: rgba(150,200,255, 0.2);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+}
+
+.my-button:hover:after {
+  animation: ripple_401 1s ease-out;
+}
+
+@keyframes ripple_401 {
+  0% {
+    width: 5px;
+    height: 5px;
+    opacity: 1;
+  }
+
+  100% {
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+  }
+}
+	</style>
 </head>
 <body>
 <nav class="nav">
@@ -67,7 +154,8 @@ else{
 }
 }
 	?>
-	<form method="post" enctype="multipart/form-data" action="profile.php">
+	<div class="bg">
+	<form class="form" method="post" enctype="multipart/form-data" action="profile.php">
 		<!-- <input type="file" name="image"> -->
 		<label>Banner:</label>
 		<input type="file" name="image" accept="image/*" required><br>
@@ -78,9 +166,10 @@ else{
 		<label>Status:</label>
 		<input type="text" name="status" required><br>
 		<label>Post Details:</label>
-		<input type="text" name="details" required><br>
-		<input type="submit" name="post" value="upload">
+		<input type="text" name="details" required><br><br>
+		<button type="submit" name="post" class="my-button" value="upload">Upload</button>
 	</form>
+</div>
 
 </body>
 </html>
