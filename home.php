@@ -15,120 +15,15 @@ $user_row = mysqli_fetch_array($user);
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>profile</title>
-	<style>
-		.card {
-  width: 250px;
-  border-radius: 0.5rem;
-  background-color: #fff;
-  display: inline-block;
-   margin: 20px;
-}
-a{
-  text-decoration: none;
-}
-
-.content {
-  padding: 1.1rem;
-}
-
-.image {  
-  width: 250px;
-  height: 300px;
-  background-color: #fff;
-  display: flex;
-  overflow: hidden;
-}
-.image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.title {
-  color: #111827;
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-  font-weight: 600;
-}
-
-.desc {
-  margin-top: 0.5rem;
-  color: #6B7280;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-
-.action {
-  display: inline-flex;
-  margin-top: 1rem;
-  color: #ffffff;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  font-weight: 500;
-  align-items: center;
-  gap: 0.25rem;
-  background-color: #2563EB;
-  padding: 4px 8px;
-  border-radius: 4px;
-}
-
-.action span {
-  transition: .3s ease;
-}
-
-.action:hover span {
-  transform: translateX(4px);
-}
-/*for more details*/
-.detail {
- display: inline-block;
- border-radius: 7px;
- border: none;
- background: #1875FF;
- color: white;
- font-family: inherit;
- text-align: center;
- font-size: 13px;
- width: 10em;
- padding: .5em;
- margin-left: 18%;
- transition: all 0.4s;
- cursor: pointer;
-}
-
-.detail span {
- cursor: pointer;
- display: inline-block;
- position: relative;
- transition: 0.4s;
-}
-
-.detail span:after {
- content: 'for more';
- position: absolute;
- opacity: 0;
- top: 0;
- right: -20px;
- transition: 0.7s;
-}
-
-.detail:hover span {
- padding-right: 3.75em;
-}
-
-.detail:hover span:after {
- opacity: 4;
- right: 0;
-}
-		</style>
+	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-	<nav>
+	<nav class="nav">
     <a style="font-size: 23px;" onclick="return false;">Welcome <?php echo $user_row['name']; ?> !</a>
-    <a style="padding-left: 30px; padding-right: 30px;" href="home.php">Home</a>
-    <a style="padding-left: 30px; padding-right: 30px;" href="profile.php"></i>Profile</a>
-    <form style="float: right; margin: 5px;" method="get">
-    <a><button type="submit" name="logout">logout</button></a>
+    <a style="padding-left: 40px; padding-right: 40px;" href="home.php">Home</a>
+    <a style="padding-left: 40px; padding-right: 40px;" href="profile.php"></i>Profile</a>
+    <form style="float: right;" method="get">
+    <a><button type="submit" name="logout" class="my-button">logout</button></a>
     
   </form>
   </nav><br>

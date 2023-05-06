@@ -12,29 +12,31 @@ $user_row = mysqli_fetch_array($user);
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Add post</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-
-<header>
-  	<h1>Welcome <?php echo $user_row['name']; ?> !</h1>
-    <a style="padding-left: 30px; padding-right: 30px;" href="home.php">Home</a>
-    <a style="padding-left: 30px; padding-right: 30px;" href="profile.php"></i>Profile</a>
-    <form style="float: right; margin: 5px;" method="get">
-		<a><button type="submit" name="logout">logout</button></a>
+<nav class="nav">
+  	<a style="font-size: 23px;" onclick="return false;">Welcome <?php echo $user_row['name']; ?> !</a>
+    <a style="padding-left: 40px; padding-right: 40px;" href="home.php">Home</a>
+    <a style="padding-left: 40px; padding-right: 40px;" href="profile.php"></i>Profile</a>
+    <form style="float: right;" method="get">
+		<button type="submit" name="logout" class="my-button">logout</button>
 		<?php
 	if(isset($_GET['logout'])){
 		
 		session_destroy();
 		
-		header('location:login.php');
+    unset($_SESSION['mail']);
+		echo '<script>window.location.href="login.php"</script>';
+
 	}
 	if ($_SESSION['mail'] == null) {
-		header('location:login.php');	
+		echo '<script>window.location.href="login.php"</script>';	
 	}
 	?>
 	</form>
-  </header>
+  </nav>
 
   <div>
 	<!-- <img src="#" alt="profile"> -->
