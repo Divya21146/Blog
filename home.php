@@ -31,12 +31,17 @@ a{
   padding: 1.1rem;
 }
 
-.image {
-  object-fit: cover;
-  width: 100%;
-  height: 150px;
-  background-color: rgb(239, 205, 255);
+.image {  
+  width: 250px;
+  height: 300px;
+  background-color: #fff;
   display: flex;
+  overflow: hidden;
+}
+.image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .title {
@@ -74,29 +79,59 @@ a{
 .action:hover span {
   transform: translateX(4px);
 }
+/*for more details*/
+.detail {
+ display: inline-block;
+ border-radius: 7px;
+ border: none;
+ background: #1875FF;
+ color: white;
+ font-family: inherit;
+ text-align: center;
+ font-size: 13px;
+ width: 10em;
+ padding: .5em;
+ margin-left: 18%;
+ transition: all 0.4s;
+ cursor: pointer;
+}
+
+.detail span {
+ cursor: pointer;
+ display: inline-block;
+ position: relative;
+ transition: 0.4s;
+}
+
+.detail span:after {
+ content: 'for more';
+ position: absolute;
+ opacity: 0;
+ top: 0;
+ right: -20px;
+ transition: 0.7s;
+}
+
+.detail:hover span {
+ padding-right: 3.75em;
+}
+
+.detail:hover span:after {
+ opacity: 4;
+ right: 0;
+}
 		</style>
 </head>
 <body>
-	<header>
-		<h1>Welcome <?php echo $user_row['name']; ?> !</h1>
-		<a style="padding-left: 30px; padding-right: 30px;" href="home.php">Home</a>
-		<a style="padding-left: 30px; padding-right: 30px;" href="profile.php">Profile</a>
-    <a style="padding-left: 30px; padding-right: 30px;" href="addpost.php"></i>Add</a>
-		<form style="float: right; margin: 5px;" method="get">
-		<a><button type="submit" name="logout">logout</button></a>
-		<?php
-	if(isset($_GET['logout'])){
-		
-		session_destroy();
-		
-		header('location:login.php');
-	}
-	if ($_SESSION['mail'] == null) {
-		header('location:login.php');	
-	}
-	?>
-	</form>
-	</header><br>
+	<nav>
+    <a style="font-size: 23px;" onclick="return false;">Welcome <?php echo $user_row['name']; ?> !</a>
+    <a style="padding-left: 30px; padding-right: 30px;" href="home.php">Home</a>
+    <a style="padding-left: 30px; padding-right: 30px;" href="profile.php"></i>Profile</a>
+    <form style="float: right; margin: 5px;" method="get">
+    <a><button type="submit" name="logout">logout</button></a>
+    
+  </form>
+  </nav><br>
 
 
  <?php
@@ -120,23 +155,19 @@ while($row1=mysqli_fetch_array($qry)){
     <p class="desc">
       <?php echo $row1['status']; ?>
     </p>
-    <p class="desc">
-      <?php echo $row1['reg_date']; ?>
-    </p>
 
-    <a href="detail.php?id=<?php echo $row1['id']?>" class="action">
-      Detailed view
-      <span aria-hidden="true">
-        →
-      </span>
-    </a>
+    <a href="detail.php?id=<?php echo $row1['id']?>">
+      <button class="detail" style="vertical-align:middle"><span>Click</span></button>
+    </a><br>
+    <hr>
+    
     <?php
     $mail1=$row1['mail'];
     $fetch=mysqli_query($conn,"select * from registration where mail='$mail1'");
     while ($use=mysqli_fetch_array($fetch)) {
     ?>
     <p class="desc">
-      Created by <i> <?php echo $use['name']; ?></i>
+      <?php echo $row1['reg_date']; ?> | Created by <i> <?php echo $use['name']; ?></i>
     </p>
     <?php
   }
@@ -146,6 +177,18 @@ while($row1=mysqli_fetch_array($qry)){
 <?php 
 }
 ?>
+
+  <?php
+  if(isset($_GET['logout'])){
+    
+    session_destroy();
+    unset($_SESSION['mail']);
+    echo '<script>window.location.href="login.php"</script>';
+  }
+  if ($_SESSION['mail'] == null) {
+    echo '<script>window.location.href="login.php"</script>';
+  }
+  ?>
 
 </body>
 </html>
