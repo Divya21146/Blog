@@ -79,9 +79,10 @@ a{
 <body>
 	<header>
 		<h1>Welcome <?php echo $user_row['name']; ?> !</h1>
-		<a href="home.php">Home</a>
-		<a href="profile.php">Profile</a>
-		<form method="get">
+		<a style="padding-left: 30px; padding-right: 30px;" href="home.php">Home</a>
+		<a style="padding-left: 30px; padding-right: 30px;" href="profile.php">Profile</a>
+    <a style="padding-left: 30px; padding-right: 30px;" href="addpost.php"></i>Add</a>
+		<form style="float: right; margin: 5px;" method="get">
 		<a><button type="submit" name="logout">logout</button></a>
 		<?php
 	if(isset($_GET['logout'])){
@@ -95,7 +96,7 @@ a{
 	}
 	?>
 	</form>
-	</header>
+	</header><br>
 
 
  <?php
