@@ -52,6 +52,20 @@ else {
 
   <link rel="stylesheet" type="text/css" href="style.css">
   <link rel="stylesheet" type="text/css" href="form.css">
+  <style>
+    .bg{
+      width: 68%;
+      height: 74%;
+      margin-left: 150px;
+    }
+    .col1{
+      padding: 55px 50px 55px 10px;
+      border-right: 1px solid black;
+    }
+    .col2{
+      padding: 5px 10px 20px 50px;
+    }
+  </style>
 
   </head>
   <body>
@@ -84,9 +98,10 @@ else {
   while($row1=mysqli_fetch_array($show)){
   ?>
   <div class="bg">
+    <div class="row">
+      <div class="col1" style="float: left;">
   <form class="form" method="post" enctype="multipart/form-data" autocomplete="off">
     <!-- <input type="file" name="image"> -->
-    <label><b>Banner:</b></label><br><br>
       <img width="350px" height="350px" src="upload/<?php echo $row1['image']; ?>"><br><br> 
       <?php
       $folder="upload/";
@@ -94,6 +109,9 @@ else {
       $array=mysqli_fetch_array($pull);
       $image=$array['image'];
       ?>   
+    </div>
+    <div class="col2" style="float: left;">
+    <label><b>Banner:</b></label><br><br>
 <input type="file" name="image" accept="image/*" value="<?php echo $image; ?>"><br>
     <label><b>Post Title:</b></label>
     <input type="text" name="title" value="<?php echo $row1['title']; ?>" required><br>
@@ -101,9 +119,11 @@ else {
     <input type="text" name="description" value="<?php echo $row1['description']; ?>" required><br>
     <label><b>Status:</b></label>
     <input type="text" name="status" value="<?php echo $row1['status']; ?>" required><br>
-    <label for="details"><b>Details:</b></label>
+    <label for="details"><b>Details:</b></label><br><br>
     <textarea style="background-color: #E6F2F2;" class="textarea" name="details" id="details" rows="7" cols="61" required><?php echo $row1['details']; ?></textarea><br><br>
     <button type="submit" name="btn" class="upload" onclick="return msg()">update</button>
+  </div>
+</div>
   </form>
 
 <?php
