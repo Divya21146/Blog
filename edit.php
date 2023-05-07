@@ -54,7 +54,7 @@ else {
   <link rel="stylesheet" type="text/css" href="form.css">
   <style>
     .bg{
-      width: 68%;
+      width: 69%;
       height: 74%;
       margin-left: 150px;
     }
