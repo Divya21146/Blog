@@ -169,7 +169,7 @@ if(isset($_POST['submit'])){
 		<label>Confirm password</label>
 		<input type="password" name="confirm_password" placeholder="Enter your confirm password" required><br>
 		<label>Mobile</label>
-		<input type="number" name="number" pattern="[0-9]{10}$s" placeholder="Enter your mobile number" required><br>
+		<input type="number" name="number" id="number" pattern="[0-9]{10}$s" placeholder="Enter your mobile number" required><br>
 		<label>Address</label>
 		<input type="textarea" name="address" placeholder="Enter your address" required><br>
         <p>Already registered?<a href="login.php">login</a></p>
@@ -178,5 +178,27 @@ if(isset($_POST['submit'])){
 </div>
 </div>
 
+<script>
+	const numberInput = document.getElementById('number');
+
+numberInput.addEventListener('input', () => {
+  const numberValue = numberInput.value;
+  
+  // Check if the number input contains only digits
+  const isNumberValid = /^\d+$/.test(numberValue);
+  
+  // Check if the number input contains exactly 10 digits
+  const isLengthValid = numberValue.length === 10;
+  
+  // Set the input's validity based on the validation checks
+  numberInput.setCustomValidity(
+    isNumberValid && isLengthValid ? '' : 'Please enter a 10-digit number'
+  );
+  
+  // Update the input's UI to show any validation errors
+  numberInput.reportValidity();
+});
+
+</script>
 </body>
 </html>

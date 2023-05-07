@@ -16,6 +16,8 @@ $user_row = mysqli_fetch_array($user);
   define('search', '(,),@,$,#,%,&,*,!,",\' ');
   define('replace', ' ');
   $details = str_replace(search, replace, $details);
+  $description = htmlspecialchars($_POST['description'], ENT_QUOTES, 'UTF-8');
+  $description = str_replace(search, replace, $description);
 
     $path=move_uploaded_file($fileloc,$folder.$filename);
 
