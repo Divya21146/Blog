@@ -11,6 +11,9 @@ if(isset($_POST['submit'])){
 	elseif ($password != $confirm_password) {
 		echo '<script>alert("password and confirm password does not match!")</script>';
 	}
+	elseif (strlen($number) != 10) {
+	echo '<script>alert("Phone number must contain 10 digits")</script>';
+	}
 	else{
 	$reg_date=date('Y-m-d H:i:s');
 	$qry=mysqli_query($conn,"insert into registration values ('', '$name','$mail','$password','$confirm_password','$number','$address','$reg_date')");
