@@ -38,7 +38,7 @@ if(isset($_POST['submit'])){
 			margin: 130px 360px;
 		}
 		.left{
-			margin: -90px -130px;
+			margin: -110px -180px 20px;
 			float: left;
 			background-color: #fff;
 			display: flex;
@@ -53,7 +53,7 @@ if(isset($_POST['submit'])){
 			}
 		.bg{
 			float: right;
-			margin: -90px 370px;
+			margin: -110px 320px 20px;
 			position: absolute;
 			width: 400px;
 			height: 638px;
@@ -155,7 +155,7 @@ if(isset($_POST['submit'])){
 	<div class="container">
 		<div class="left"><img src="mount.jpg"></div>
 		<div class="bg">
-			<form method="post" action="registration.php">
+			<form method="post" action="registration.php" autocomplete="off">
 		<h1>Registration form</h1><br>
 		<label>Name</label>
 		<input type="text" name="name" placeholder="Enter your name" required><br>

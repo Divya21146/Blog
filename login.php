@@ -31,7 +31,7 @@ if (isset($_POST['log'])) {
 			margin: 130px 360px;
 		}
 		.left{
-			margin: -60px -130px;
+			margin: -100px -180px;
 			float: left;
 			background-color: #fff;
 			display: flex;
@@ -46,7 +46,7 @@ if (isset($_POST['log'])) {
 			}
 		.bg{
 			float: right;
-			margin: -60px 370px;
+			margin: -100px 320px;
 			position: absolute;
 			width: 400px;
 			height: 568px;
@@ -145,7 +145,7 @@ if (isset($_POST['log'])) {
 	<div class="container">
 		<div class="left"><img src="mount.jpg"></div>
 		<div class="bg">
-			<form method="post" action="login.php"><br><br><br><br><br>
+			<form method="post" action="login.php" autocomplete="off"><br><br><br><br><br>
 				<h1>Login</h1><br>
 				<label>Email</label>
 				<input type="email" name="mail" placeholder="Enter your email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required><br><br>

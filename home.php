@@ -16,6 +16,9 @@ $user_row = mysqli_fetch_array($user);
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>profile</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
+  <style>
+    
+  </style>
 </head>
 <body>
 	<nav class="nav">
@@ -40,13 +43,15 @@ while($row1=mysqli_fetch_array($qry)){
 
 </div>
   <div class="content">
-      <span class="title">
+      <span style="text-transform: uppercase;" class="title">
         <?php echo $row1['title']; ?>
       </span>
 
-    <p class="desc">
-      <?php echo $row1['description']; ?>
+    <div class="scroll">
+    <p class="desc1">
+      <i><?php echo $row1['description']; ?></i>
     </p>
+  </div>
     <p class="desc">
       <?php echo $row1['status']; ?>
     </p>
@@ -61,7 +66,7 @@ while($row1=mysqli_fetch_array($qry)){
     $fetch=mysqli_query($conn,"select * from registration where mail='$mail1'");
     while ($use=mysqli_fetch_array($fetch)) {
     ?>
-    <p class="desc">
+    <p class="desc2">
       <?php echo $row1['reg_date']; ?> | Created by <i> <?php echo $use['name']; ?></i>
     </p>
     <?php

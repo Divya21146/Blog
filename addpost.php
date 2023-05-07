@@ -14,93 +14,7 @@ $user_row = mysqli_fetch_array($user);
 <head>
 	<title>Add post</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
-	<style>
-		.bg{
-			position: absolute;
-			width: 450px;
-			height: 450px;
-			padding: 30px 50px 0 50px;
-			border: 1px solid black;
-			border-radius: 10px;
-			margin: 60px 370px;
-		}
-		.bg h1{
-			margin: 0;
-			padding: 0 0 20px;
-			color: black;
-			text-align: center;
-			font-style: italic;
-		}
-		.bg label{
-			margin: 0;
-			padding: 0;
-			color: #000;
-		}
-		p{
-			color: #000;
-		}
-		.bg input{
-			width: 100%;
-			margin-bottom: 20px;
-		}
-		.bg input[type=fle],
-		.bg input[type=text]{
-			border: none;
-			border-bottom: 1px solid #000;
-			background: transparent;
-			outline: none;
-			height: 35px;
-			color: #000;
-			font-size: 15px;
-		}
-		.my-button {
-  background-color: rgb(24,117,255);
-  border: none;
-  color: white;
-  padding: 10px 30px;
-  text-align: center;
-  /*text-decoration: none;
-  display: inline-block;*/
-  font-size: 14px;
-  border-radius: 10px;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
-  position: relative;
-  overflow: hidden;
-  float: right;
-  margin-right: 0;
-}
-
-.my-button:after {
-  content: "";
-  background-color: rgba(150,200,255, 0.2);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-}
-
-.my-button:hover:after {
-  animation: ripple_401 1s ease-out;
-}
-
-@keyframes ripple_401 {
-  0% {
-    width: 5px;
-    height: 5px;
-    opacity: 1;
-  }
-
-  100% {
-    width: 200px;
-    height: 200px;
-    opacity: 0;
-  }
-}
-	</style>
+	<link rel="stylesheet" type="text/css" href="form.css">
 </head>
 <body>
 <nav class="nav">
@@ -125,7 +39,6 @@ $user_row = mysqli_fetch_array($user);
 	</form>
   </nav>
 
-  <div>
 	<!-- <img src="#" alt="profile"> -->
 	<?php
 	extract($_POST);
@@ -145,8 +58,9 @@ $user_row = mysqli_fetch_array($user);
 	$folder="upload/";
 	$path=move_uploaded_file($fileloc,$folder.$filename);
 	$store=mysqli_query($conn,"insert into post values ('','$mail','$filename','$title', '$description', '$status', '$details','$reg_date') ");
-	if ($store) {
-		echo '<script>alert("upload successfully")</script>';	
+	if ($store !== '') {
+		echo '<script type="text/javascript">function msg(){alert("Post added successfully");
+return true;}window.location.href="profile.php"</script>';	
 	}
 }
 else{
@@ -155,21 +69,22 @@ else{
 }
 	?>
 	<div class="bg">
-	<form class="form" method="post" enctype="multipart/form-data" action="profile.php">
+	<form class="form" method="post" enctype="multipart/form-data" autocomplete="off" action="addpost.php">
 		<!-- <input type="file" name="image"> -->
-		<label>Banner:</label>
+		<label><b>Banner:</b></label><br><br>
 		<input type="file" name="image" accept="image/*" required><br>
-		<label>Post Title:</label>
+		<label><b>Post Title:</b></label>
 		<input type="text" name="title" required><br>
-		<label>Post Description:</label>
+		<label><b>Post Description:</b></label>
 		<input type="text" name="description" required><br>
-		<label>Status:</label>
+		<label><b>Status:</b></label>
 		<input type="text" name="status" required><br>
-		<label>Post Details:</label>
-		<input type="text" name="details" required><br><br>
-		<button type="submit" name="post" class="my-button" value="upload">Upload</button>
+		<label for="details"><b>Post Details:</b></label><br><br>
+		<textarea style="background-color: #E6F2F2;" class="textarea" type="text" name="details" id="details" rows="7"  cols="61" required></textarea><br><br>
+		<button type="submit" name="post" class="upload" onclick="return msg()">Upload</button>
 	</form>
 </div>
+
 
 </body>
 </html>

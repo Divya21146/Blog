@@ -1,7 +1,15 @@
+* {
+  font-family: sans-serif;
+}
+ body {
+  background-color: #E6F2F2;
+}
 .nav{
 			padding: 15px;
 			box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.2), -4px 4px 5px rgba(0, 0, 0, 0.2);
 			border-radius: 10px;
+      background-color: #000;
+      color: #fff;
 		}
 		.card {
   width: 250px;
@@ -12,10 +20,13 @@
 }
 a{
   text-decoration: none;
+  color: #fff;
 }
 
 .content {
   padding: 1.1rem;
+  text-align: justify;
+  padding-right: 5px;
 }
 
 .image {  
@@ -31,18 +42,27 @@ a{
   object-fit: cover;
 }
 
-.title {
-  color: #111827;
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-  font-weight: 600;
-}
-
-.desc {
+.desc1 {
   margin-top: 0.5rem;
-  color: #6B7280;
   font-size: 0.875rem;
   line-height: 1.25rem;
+  height: 35px;
+  font-weight: bold;
+  padding-right: 3px;
+}
+.desc, .desc2, .title {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  }
+  .desc2{
+     color: #6B7280;
+  }
+.scroll{
+
+  max-height: 80px; /* set a maximum height for the card */
+  overflow-y: auto; /* enable vertical scrolling */
+  box-sizing: border-box; /* include padding and border in container size */
 }
 
 .action {
@@ -78,7 +98,7 @@ a{
   transition: width 0.2s ease-in-out;
   font-weight: 500;
   font-family: inherit;
-  margin-left: 30px;
+  margin-left: 40px;
 }
 
 .add-btn:hover {
@@ -277,7 +297,7 @@ a{
 }
 
 .detail:hover span {
- padding-right: 3.75em;
+ padding-right: 3.95em;
 }
 
 .detail:hover span:after {
@@ -340,7 +360,7 @@ a{
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
   position: relative;
   overflow: hidden;
-  margin: -3px 10px 0 0;
+  margin: -5px 10px 0 0;
 }
 
 .my-button:after {

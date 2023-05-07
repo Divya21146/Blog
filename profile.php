@@ -16,6 +16,7 @@ $user_row = mysqli_fetch_array($user);
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>profile</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
+
 </head>
 <body>
 <nav class="nav">
@@ -46,13 +47,14 @@ $user_row = mysqli_fetch_array($user);
 
 </div>
   <div class="content">
-      <span class="title">
+      <span style="text-transform: uppercase;" class="title">
         <?php echo $row1['title']; ?>
       </span>
-
-    <p class="desc">
-      <?php echo $row1['description']; ?>
+      <div class="scroll">
+    <p class="desc1">
+      <i><?php echo $row1['description']; ?></i>
     </p>
+</div>
     <p class="desc">
       <?php echo $row1['status']; ?>
     </p>
