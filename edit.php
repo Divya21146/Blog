@@ -12,6 +12,10 @@ $user_row = mysqli_fetch_array($user);
     $filename=$_FILES['image']['name'];
     $fileloc=$_FILES['image']['tmp_name'];
     $folder="upload/";
+    $details = htmlspecialchars($_POST['details'], ENT_QUOTES, 'UTF-8');
+  define('search', '(,),@,$,#,%,&,*,!,",\' ');
+  define('replace', ' ');
+  $details = str_replace(search, replace, $details);
 
     $path=move_uploaded_file($fileloc,$folder.$filename);
 
@@ -96,7 +100,7 @@ else {
     <label><b>Status:</b></label>
     <input type="text" name="status" value="<?php echo $row1['status']; ?>" required><br>
     <label for="details"><b>Details:</b></label>
-    <textarea style="background-color: #E6F2F2;" class="textarea" type="text" name="details" id="details" rows="7" cols="61" required><?php echo $row1['details']; ?></textarea><br><br>
+    <textarea style="background-color: #E6F2F2;" class="textarea" name="details" id="details" rows="7" cols="61" required><?php echo $row1['details']; ?></textarea><br><br>
     <button type="submit" name="btn" class="upload" onclick="return msg()">update</button>
   </form>
 

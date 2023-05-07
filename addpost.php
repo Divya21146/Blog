@@ -56,6 +56,10 @@ $user_row = mysqli_fetch_array($user);
 	$filename=uniqid().'-'.$_FILES['image']['name'];
 	$fileloc=$_FILES['image']['tmp_name'];
 	$folder="upload/";
+	$details = htmlspecialchars($_POST['details'], ENT_QUOTES, 'UTF-8');
+	define('search', '(,),@,$,#,%,&,*,!,",\' ');
+	define('replace', ' ');
+	$details = str_replace(search, replace, $details);
 	$path=move_uploaded_file($fileloc,$folder.$filename);
 	$store=mysqli_query($conn,"insert into post values ('','$mail','$filename','$title', '$description', '$status', '$details','$reg_date') ");
 	if ($store !== '') {
@@ -80,7 +84,7 @@ else{
 		<label><b>Status:</b></label>
 		<input type="text" name="status" required><br>
 		<label for="details"><b>Post Details:</b></label><br><br>
-		<textarea style="background-color: #E6F2F2;" class="textarea" type="text" name="details" id="details" rows="7"  cols="61" required></textarea><br><br>
+		<textarea style="background-color: #E6F2F2;" class="textarea" name="details" id="details" rows="7"  cols="61" required></textarea><br><br>
 		<button type="submit" name="post" class="upload" onclick="return msg()">Upload</button>
 	</form>
 </div>
