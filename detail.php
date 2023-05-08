@@ -59,7 +59,7 @@ body{
     $use=mysqli_fetch_array($fetch);
       ?>
       <h2 style="padding-bottom: 20px;"><?php echo $row['title']; ?> </h2>
-    <p><?php echo $row['reg_date']; ?> | Created by <i> <?php echo $use['name']; ?></i> | <?php echo $row['title']; ?></p>
+    <p><?php echo $row['reg_date']; ?> | Created by <i> <?php echo $use['name']; ?></i> | <?php echo $row['status']; ?></p>
   </div>
   <div style="overflow:auto">
   <div class="menu">
